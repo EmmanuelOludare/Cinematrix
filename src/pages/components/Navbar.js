@@ -58,7 +58,7 @@ export default function Navbar() {
             <Image
                 src={man}
                 alt=""
-                className='rounded-full border-2 border-white'
+                className='rounded-[50%] border-2 border-white'
                 height={24}
                 width={24}
             />

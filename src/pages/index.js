@@ -1,26 +1,53 @@
 import { useState, useEffect } from 'react';
+import Trending from './components/Trending';
+import { TrendingProvider } from '../contexts/TrendingContext';
+import PopularMovies from './components/PopularMovies';
+import { PopularMoviesProvider } from '../contexts/PopularMoviesContext';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import Navbar from './components/Navbar';
 import search from '../assets/icon-search.svg';
-import mediaIcon from '../assets/media-type.svg';
-import bookmarkEmpty from '../assets/icon-bookmark-empty.svg';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper';
-import 'swiper/css';
 
 export default function Home() {
-  const [allMovies, setAllMovies] = useState([]);
+  const [movieGenres, setMovieGenres] = useState([]);
+  const [tvGenres, setTvGenres] = useState([]);
+  const [genres, setGenres] = useState();
+  const [information, setInformation] = useState();
+  const [visible, setVisible] = useState(false);
+
   useEffect(() => {
     try {
-      fetch('https://api.themoviedb.org/3/trending/all/day?api_key=48510b80e031b1cc54f349f5f5adb8bd')
+      fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=48510b80e031b1cc54f349f5f5adb8bd&language=en-US')
         .then(res => res.json())
-        .then(data => setAllMovies(data.results.splice(0, 10)));
+        .then(data => setMovieGenres(data.genres));
     } catch (error) {
       console.log(error);
     }
+
+    try {
+      fetch('https://api.themoviedb.org/3/genre/tv/list?api_key=48510b80e031b1cc54f349f5f5adb8bd&language=en-US')
+        .then(res => res.json())
+        .then(data => setTvGenres(data.genres));
+    } catch (error) {
+      console.log(error);
+    }
+
+    setGenres([...movieGenres, ...tvGenres])
   }, []);
+
+  const viewInformation = (movie) => {
+    setInformation(movie);
+    setVisible(true);
+  }
+
+  const checkId = (genreId) => {
+    for (let i = 0; i <= genres.length; i++) {
+      if (genreId === genres[i].id) {
+        return genres[i].name;
+      }
+    }
+  }
 
   return (
     <>
@@ -40,59 +67,39 @@ export default function Home() {
           />
           <input type="text" placeholder='Search for movies or TV series' className='outline-none bg-transparent w-full font-light indent-3 text-lg text-white focus:pb-1 caret-red focus:border-b-grayish-blue focus:border-b-2' />
         </div>
-        <div className="">
-          <p className='pl-4 pb-4 pt-6 text-white text-xl font-light'>Trending</p>
-          <div className="h-[200px] w-screen flex justify-start gap-5 overflow-x-scroll">
-            <Swiper
-              // install Swiper modules
-              modules={[Autoplay]}
-              spaceBetween={30}
-              slidesPerView={1}
-              direction="horizontal"
-              loop={true}
-              autoplay={{
-                delay: 5000,
-                disableOnInteraction: false,
-              }}
-            >
-              {allMovies.map((movie, index) => (
-                <SwiperSlide key={index}>
-                  <div className='h-[200px] shrink-0 relative px-4'>
-                    <div className='bg-dark-blue absolute right-6 top-2 opacity-50 rounded-[50%] p-[12px]'>
-                      <Image
-                        src={bookmarkEmpty}
-                        alt=""
-                        className='h-4 w-[14px]'
-                      />
+        <TrendingProvider>
+          <Trending viewInformation={viewInformation} />
+        </TrendingProvider>
+        <PopularMoviesProvider>
+          <PopularMovies viewInformation={viewInformation} />
+        </PopularMoviesProvider>
+        {visible ?
+          <div onClick={() => setVisible(false)} className='z-10 h-screen fixed top-0 bottom-0 bg-black bg-opacity-90 flex justify-center items-center p-4'>
+            <div className='rounded-md bg-dark-blue z-20 text-white'>
+              <img
+                src={`https://image.tmdb.org/t/p/w500${information.backdrop_path}`}
+                alt=""
+                className='rounded-t-md w-full'
+              />
+              <div className='p-4 flex flex-col gap-2 font-light select-text-red'>
+                <p className=' text-3xl'>{information.title || information.name}</p>
+                <div className='inline-flex gap-1 text-lg'>
+                  <p>Released: </p>
+                  <p className='w-[3.5ch] overflow-hidden whitespace-nowrap'>{information.release_date || information.first_air_date}</p>
+                </div>
+                <div className='inline-block items-center gap-2'>
+                  {information.genre_ids.map((genre, index) => (
+                    <div key={index} className='flex items-center gap-2'>
+                      <div className='h-[5px] w-[5px] rounded-[50%] bg-white'></div>
+                      <p className='text-lg '>{checkId(genre)}</p>
                     </div>
-                    <img
-                      src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
-                      alt=""
-                      className='rounded-lg'
-                    />
-                    <div className='text-white absolute left-8 bottom-4 flex flex-col gap-1'>
-                      <div className='flex gap-2 opacity-90 items-center'>
-                        <p className='font-light text-sm w-[3.5ch] overflow-hidden whitespace-nowrap'>{movie.release_date || movie.first_air_date}</p>
-                        <div className='h-[5px] w-[5px] rounded-[50%] bg-white'></div>
-                        <div className='flex gap-[6px] items-center'>
-                          <Image
-                            src={mediaIcon}
-                            alt=""
-                            className='h-4 w-[14px]'
-                          />
-                          <p className='font-light text-sm'>{movie.media_type === 'tv' ? movie.media_type.charAt(0).toUpperCase() + movie.media_type.slice(1) + ` Series` : movie.media_type.charAt(0).toUpperCase() + movie.media_type.slice(1)}</p>
-                        </div>
-                        <div className='h-[5px] w-[5px] rounded-[50%] bg-white'></div>
-                        <p className='font-light text-sm'>{movie.adult ? '18+' : 'PG'}</p>
-                      </div>
-                      <p className='text-md'>{movie.title || movie.name}</p>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
+                  ))}
+                </div>
+                <p className='text-md '>{information.overview}</p>
+              </div>
+            </div>
           </div>
-        </div>
+          : <></>}
         <Link href="/Signup" className='text-red'>Sign up</Link>
         <Link href="/Login" className='text-red'>Login</Link>
       </main >

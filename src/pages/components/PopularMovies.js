@@ -24,7 +24,7 @@ export default function PopularMovies({ viewInformation, }) {
         <div className="">
             <p className='pl-4 pb-4 pt-6 text-white text-xl font-light'>Popular Movies</p>
             <div className="h-[250px] w-screen flex justify-start gap-5 overflow-x-scroll">
-                {isLoading ? <Swiper
+                {isLoading ? <p>up</p> : <Swiper
                     // install Swiper modules
                     modules={[Autoplay]}
                     spaceBetween={0}
@@ -47,7 +47,7 @@ export default function PopularMovies({ viewInformation, }) {
                             </div>
                         </SwiperSlide>
                     ))}
-                </Swiper> : <p>pop</p>}
+                </Swiper>}
             </div>
         </div>
     )

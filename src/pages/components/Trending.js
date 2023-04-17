@@ -26,7 +26,7 @@ export default function Trending({ viewInformation, }) {
     <div className="">
       <p className='pl-4 pb-4 pt-6 text-white text-xl font-light'>Trending Now</p>
       <div className="h-[200px] w-screen flex justify-start gap-5 overflow-x-scroll">
-        {isLoading ? <Swiper
+        {isLoading ? <p>up</p> : <Swiper
           // install Swiper modules
           modules={[Autoplay]}
           spaceBetween={30}
@@ -73,7 +73,7 @@ export default function Trending({ viewInformation, }) {
               </div>
             </SwiperSlide>
           ))}
-        </Swiper> : <p>up</p>}
+        </Swiper>}
       </div>
     </div>
   )

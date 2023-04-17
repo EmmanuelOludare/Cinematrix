@@ -1,12 +1,10 @@
-import { usePopularMovies } from '../../contexts/PopularMoviesContext';
 import Image from 'next/image';
 import bookmarkEmpty from '../../assets/icon-bookmark-empty.svg';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper';
 import 'swiper/css';
 
-export default function PopularMovies({ viewInformation }) {
-    const popularMovies = usePopularMovies();
+export default function PopularMovies({ viewInformation, popularMovies }) {
     return (
         <div className="">
             <p className='pl-4 pb-4 pt-6 text-white text-xl font-light'>Popular Movies</p>

@@ -1,4 +1,5 @@
-import { useTrending } from '../../contexts/TrendingContext';
+import { useState } from 'react';
+import axios from 'axios';
 import Image from 'next/image';
 import mediaIcon from '../../assets/media-type.svg';
 import bookmarkEmpty from '../../assets/icon-bookmark-empty.svg';
@@ -6,9 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper';
 import 'swiper/css';
 
-export default function Trending({ viewInformation }) {
-  const trending = useTrending();
-
+export default function Trending({ viewInformation, trending }) {
   return (
     <div className="">
       <p className='pl-4 pb-4 pt-6 text-white text-xl font-light'>Trending Now</p>

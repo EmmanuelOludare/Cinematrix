@@ -4,12 +4,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper';
 import 'swiper/css';
 
-export default function PopularMovies({ viewInformation, popularMovies }) {
+export default function PopularMovies({ viewInformation, popularMovies, isLoading }) {
     return (
         <div className="">
             <p className='pl-4 pb-4 pt-6 text-white text-xl font-light'>Popular Movies</p>
             <div className="h-[250px] w-screen flex justify-start gap-5 overflow-x-scroll">
-                <Swiper
+                {isLoading ? <Swiper
                     // install Swiper modules
                     modules={[Autoplay]}
                     spaceBetween={0}
@@ -32,7 +32,7 @@ export default function PopularMovies({ viewInformation, popularMovies }) {
                             </div>
                         </SwiperSlide>
                     ))}
-                </Swiper>
+                </Swiper> : <p>pop</p>}
             </div>
         </div>
     )

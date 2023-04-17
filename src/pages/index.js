@@ -13,10 +13,8 @@ export default function Home() {
   const [genres, setGenres] = useState();
   const [information, setInformation] = useState();
   const [visible, setVisible] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
     try {
       fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=48510b80e031b1cc54f349f5f5adb8bd&language=en-US')
         .then(res => res.json())
@@ -33,8 +31,7 @@ export default function Home() {
       console.log(error);
     }
 
-    setGenres([...movieGenres, ...tvGenres])
-    setIsLoading(false);
+    setGenres([...movieGenres, ...tvGenres]);
   }, []);
 
   const viewInformation = (movie) => {
@@ -43,12 +40,9 @@ export default function Home() {
   }
 
   const checkId = (genreId) => {
-    for (let i = 0; i <= genres.length; i++) {
-      if (genreId === genres[i].id) {
-        return genres[i].name;
-      }
-    }
-  }
+    const genre = genres.find(genre => genre.id === genreId);
+    return genre ? genre.name : null;
+  };
 
   return (
     <>

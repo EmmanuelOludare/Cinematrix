@@ -8,8 +8,6 @@ import Navbar from './components/Navbar';
 import search from '../assets/icon-search.svg';
 
 export default function Home() {
-  const [trending, setTrending] = useState([])
-  const [popularMovies, setPopularMovies] = useState([]);
   const [movieGenres, setMovieGenres] = useState([]);
   const [tvGenres, setTvGenres] = useState([]);
   const [genres, setGenres] = useState();
@@ -19,22 +17,6 @@ export default function Home() {
 
   useEffect(() => {
     setIsLoading(true);
-    try {
-      fetch('https://api.themoviedb.org/3/trending/all/day?api_key=48510b80e031b1cc54f349f5f5adb8bd')
-        .then(res => res.json())
-        .then(data => setTrending(data.results.splice(0, 10)));
-    } catch (error) {
-      console.log(error);
-    }
-
-    try {
-      fetch('https://api.themoviedb.org/3/movie/popular?api_key=48510b80e031b1cc54f349f5f5adb8bd&language=en-US&page=1')
-        .then(res => res.json())
-        .then(data => setPopularMovies(data.results));
-    } catch (error) {
-      console.log(error);
-    }
-
     try {
       fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=48510b80e031b1cc54f349f5f5adb8bd&language=en-US')
         .then(res => res.json())
@@ -86,8 +68,8 @@ export default function Home() {
           />
           <input type="text" placeholder='Search for movies or TV series' className='outline-none bg-transparent w-full font-light indent-3 text-lg text-white focus:pb-1 caret-red focus:border-b-grayish-blue focus:border-b-2' />
         </div>
-        <Trending viewInformation={viewInformation} trending={trending} isLoading={isLoading} />
-        <PopularMovies viewInformation={viewInformation} popularMovies={popularMovies} isLoading={isLoading} />
+        <Trending viewInformation={viewInformation} />
+        <PopularMovies viewInformation={viewInformation} />
         {visible ?
           <div onClick={() => setVisible(false)} className='z-10 h-screen fixed top-0 bottom-0 bg-black bg-opacity-90 flex justify-center items-center p-4'>
             <div className='rounded-md bg-dark-blue z-20 text-white'>

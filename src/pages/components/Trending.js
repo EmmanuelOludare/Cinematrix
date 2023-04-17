@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import mediaIcon from '../../assets/media-type.svg';
 import bookmarkEmpty from '../../assets/icon-bookmark-empty.svg';
@@ -7,7 +6,22 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper';
 import 'swiper/css';
 
-export default function Trending({ viewInformation, trending, isLoading, }) {
+export default function Trending({ viewInformation, }) {
+  const [trending, setTrending] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    try {
+      fetch('https://api.themoviedb.org/3/trending/all/day?api_key=48510b80e031b1cc54f349f5f5adb8bd')
+        .then(res => res.json())
+        .then(data => setTrending(data.results.splice(0, 10)));
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
+  }, []);
+
   return (
     <div className="">
       <p className='pl-4 pb-4 pt-6 text-white text-xl font-light'>Trending Now</p>

@@ -3,15 +3,15 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper';
 import 'swiper/css';
 
-export default function PopularMovies({ viewInformation, }) {
-    const [popularMovies, setPopularMovies] = useState([]);
+export default function TopRatedMovies({ viewInformation, }) {
+    const [topRatedMovies, setTopRatedMovies] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
         setIsLoading(true);
         try {
-            fetch('https://api.themoviedb.org/3/movie/popular?api_key=48510b80e031b1cc54f349f5f5adb8bd&language=en-US&page=1')
+            fetch('https://api.themoviedb.org/3/movie/top_rated?api_key=48510b80e031b1cc54f349f5f5adb8bd&language=en-US&page=1')
                 .then(res => res.json())
-                .then(data => setPopularMovies(data.results));
+                .then(data => setTopRatedMovies(data.results));
         } catch (error) {
             console.log(error);
         }
@@ -20,7 +20,7 @@ export default function PopularMovies({ viewInformation, }) {
 
     return (
         <div className="">
-            <p className='pl-4 pb-4 pt-2 text-white text-xl font-light'>Popular Movies</p>
+            <p className='pl-4 pb-4 text-white text-xl font-light'>Top Rated Movies</p>
             <div className="h-[250px] w-screen flex justify-start gap-5 overflow-x-scroll">
                 {isLoading ? <p>up</p> : <Swiper
                     // install Swiper modules
@@ -34,7 +34,7 @@ export default function PopularMovies({ viewInformation, }) {
                         disableOnInteraction: false,
                     }}
                 >
-                    {popularMovies.map((movie, index) => (
+                    {topRatedMovies.map((movie, index) => (
                         <SwiperSlide key={index}>
                             <div className='shrink-0 px-4 lg:cursor-pointer' onClick={() => viewInformation(movie)}>
                                 <img

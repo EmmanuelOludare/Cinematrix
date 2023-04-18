@@ -23,7 +23,7 @@ export default function Login() {
                     </form>
                     <div className='text-sm text-center font-light flex gap-2 justify-center'>
                         <p className=''>Don't have an account?</p>
-                        <Link href="/Signup" className='text-red'>Sign up</Link>
+                        <Link href="/signup" className='text-red'>Sign up</Link>
                     </div>
 
                 </div>

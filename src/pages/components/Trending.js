@@ -6,14 +6,14 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper';
 import 'swiper/css';
 
-export default function Trending({ viewInformation, }) {
+export default function Trending({ viewInformation, url }) {
   const [trending, setTrending] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
     try {
-      fetch('https://api.themoviedb.org/3/trending/all/day?api_key=48510b80e031b1cc54f349f5f5adb8bd')
+      fetch(url)
         .then(res => res.json())
         .then(data => setTrending(data.results.splice(0, 10)));
     } catch (error) {
@@ -53,7 +53,7 @@ export default function Trending({ viewInformation, }) {
                   alt=""
                   className='rounded-xl'
                 />
-                <div className='text-white absolute left-8 bottom-5 flex flex-col gap-1'>
+                <div className='text-white absolute left-8 bottom-5 flex flex-col gap-1 bg-blend-overlay'>
                   <div className='flex gap-2 opacity-90 items-center'>
                     <p className='font-light text-sm w-[3.5ch] overflow-hidden whitespace-nowrap'>{movie.release_date || movie.first_air_date}</p>
                     <div className='h-[5px] w-[5px] rounded-[50%] bg-white'></div>

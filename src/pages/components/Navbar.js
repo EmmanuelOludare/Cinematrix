@@ -27,7 +27,7 @@ export default function Navbar() {
                         width={20}
                     />
                 </Link>
-                <Link href="/Movies" className=''>
+                <Link href="/movies" className=''>
                     <Image
                         src={movies}
                         alt=""
@@ -36,7 +36,7 @@ export default function Navbar() {
                         width={20}
                     />
                 </Link>
-                <Link href="/Series" className='text-red'>
+                <Link href="/series" className='text-red'>
                     <Image
                         src={series}
                         alt=""
@@ -45,7 +45,7 @@ export default function Navbar() {
                         width={20}
                     />
                 </Link>
-                <Link href="/Bookmarked" className='text-red'>
+                <Link href="/bookmarked" className='text-red'>
                     <Image
                         src={bookmarks}
                         alt=""

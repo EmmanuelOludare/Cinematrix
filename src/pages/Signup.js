@@ -24,7 +24,7 @@ export default function Signup() {
                     </form>
                     <div className='text-sm text-center font-light flex gap-2 justify-center'>
                         <p className=''>Already have an account?</p>
-                        <Link href="/Login" className='text-red'>Login</Link>
+                        <Link href="/login" className='text-red'>Login</Link>
                     </div>
                 </div>
             </div>

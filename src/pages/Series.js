@@ -25,8 +25,8 @@ export default function Series() {
                     />
                     <input type="text" placeholder='Search for TV series' className='outline-none bg-transparent w-full font-light indent-3 text-lg text-white focus:pb-1 caret-red focus:border-b-grayish-blue focus:border-b-2' />
                 </div>
-                <Link href="/Signup" className='text-red'>Sign up</Link>
-                <Link href="/Login" className='text-red'>Login</Link>
+                <Link href="/signup" className='text-red'>Sign up</Link>
+                <Link href="/login" className='text-red'>Login</Link>
             </main >
         </>
     )

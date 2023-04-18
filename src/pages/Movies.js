@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import Trending from './components/Trending';
+import UpcomingMovies from './components/UpcomingMovies';
 import PopularMovies from './components/PopularMovies';
 import TopRatedMovies from './components/TopRatedMovies';
-import PopularSeries from './components/PopularSeries';
-import TopRatedSeries from './components/TopRatedSeries';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -57,7 +56,7 @@ export default function Movies() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="./favicon.ico" />
             </Head>
-            <main className='bg-dark-blue font-outfit'>
+            <main className='bg-dark-blue font-outfit pb-20'>
                 <Navbar />
                 <div className='flex items-center px-4 gap-4 mt-6'>
                     <Image
@@ -70,6 +69,9 @@ export default function Movies() {
                     <input type="text" placeholder='Search for Movies' className='outline-none bg-transparent w-full font-light indent-3 text-lg text-white focus:pb-1 caret-red focus:border-b-grayish-blue focus:border-b-2' />
                 </div>
                 <Trending viewInformation={viewInformation} url={trendingUrl} />
+                <UpcomingMovies viewInformation={viewInformation} />
+                <PopularMovies viewInformation={viewInformation} />
+                <TopRatedMovies viewInformation={viewInformation} />
                 {visible ?
                     <div onClick={() => setVisible(false)} className='z-20 h-full fixed top-0 bottom-0 bg-black bg-opacity-90 flex justify-center items-center p-4'>
                         <div className='rounded-md bg-dark-blue z-30 text-white'>
@@ -123,8 +125,13 @@ export default function Movies() {
                         </div>
                     </div>
                     : <></>}
-                <Link href="/Signup" className='text-red'>Sign up</Link>
-                <Link href="/Login" className='text-red'>Login</Link>
+                <div className='bg-semi-dark-blue text-white fixed bottom-0 z-10 w-full py-3 px-5 flex items-center justify-between'>
+                    <p className='text-lg'>Watch limitlessly!</p>
+                    <div className='flex items-center gap-2'>
+                        <Link href="/login" className='border-[1px] border-white rounded-xl py-2 px-5 font-bold'>Login</Link>
+                        <Link href="/signup" className='text-red bg-white rounded-xl py-2 px-5 font-bold'>Sign up</Link>
+                    </div>
+                </div>
             </main >
         </>
     )

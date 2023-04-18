@@ -7,18 +7,26 @@ import TopRatedSeries from './components/TopRatedSeries';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router'
 import Navbar from './components/Navbar';
 import search from '../assets/icon-search.svg';
 import bookmarkEmpty from '../assets/icon-bookmark-empty.svg';
 import play from '../assets/icon-bookmark-empty.svg';
 
 export default function Home() {
+  const [query, setQuery] = useState('');
+  const [searchInfo, setSearchInfo] = useState([]);
   const [movieGenres, setMovieGenres] = useState([]);
   const [tvGenres, setTvGenres] = useState([]);
   const [genres, setGenres] = useState();
   const [information, setInformation] = useState();
   const [visible, setVisible] = useState(false);
+  const router = useRouter();
   const trendingUrl = 'https://api.themoviedb.org/3/trending/all/day?api_key=48510b80e031b1cc54f349f5f5adb8bd';
+
+  const handleChange = e => {
+    setQuery(e.target.value);
+  }
 
   useEffect(() => {
     try {
@@ -40,6 +48,18 @@ export default function Home() {
     setGenres([...movieGenres, ...tvGenres]);
   }, []);
 
+  async function getQuery() {
+    try {
+      const response = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=48510b80e031b1cc54f349f5f5adb8bd&language=en-US&query=${query}&page=1&include_adult=false`);
+      const data = await response.json();
+      setSearchInfo(data.results);
+    } catch (error) {
+      console.error(error);
+    }
+    router.push({ pathname: '/search', searchInfo },
+      '/search')
+  }
+
   const viewInformation = (movie) => {
     setInformation(movie);
     setVisible(true);
@@ -58,15 +78,16 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="./favicon.ico" />
       </Head>
-      <main className='bg-dark-blue font-outfit pb-12'>
+      <main className='bg-dark-blue font-outfit pb-20'>
         <Navbar />
         <div className='flex items-center px-4 gap-4 mt-6'>
           <Image
             src={search}
             alt="Cinematrix Logo"
             className='h-6 w-6'
+            onClick={getQuery}
           />
-          <input type="text" placeholder='Search for movies or TV series' className='outline-none bg-transparent w-full font-light indent-3 text-lg text-white focus:pb-1 caret-red focus:border-b-grayish-blue focus:border-b-2' />
+          <input type="text" value={query} onChange={handleChange} placeholder='Search for movies or TV series' className='outline-none bg-transparent w-full font-light indent-3 text-lg text-white focus:pb-1 caret-red focus:border-b-grayish-blue focus:border-b-2' />
         </div>
         <Trending viewInformation={viewInformation} url={trendingUrl} />
         <PopularMovies viewInformation={viewInformation} />

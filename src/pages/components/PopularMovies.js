@@ -20,7 +20,7 @@ export default function PopularMovies({ viewInformation, }) {
 
     return (
         <div className="">
-            <p className='pl-4 pb-4 pt-2 text-white text-xl font-light'>Popular Movies</p>
+            <p className='pl-4 pb-4 pt-6 text-white text-xl font-light'>Popular Movies</p>
             <div className="h-[250px] w-screen flex justify-start gap-5 overflow-x-scroll">
                 {isLoading ? <p>up</p> : <Swiper
                     // install Swiper modules

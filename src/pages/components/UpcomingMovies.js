@@ -3,15 +3,15 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper';
 import 'swiper/css';
 
-export default function PopularSeries({ viewInformation, }) {
-    const [popularSeries, setPopularSeries] = useState([]);
+export default function UpcomingMovies({ viewInformation, }) {
+    const [upcomingMovies, setUpcomingMovies] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
         setIsLoading(true);
         try {
-            fetch('https://api.themoviedb.org/3/tv/popular?api_key=48510b80e031b1cc54f349f5f5adb8bd&language=en-US&page=1')
+            fetch('https://api.themoviedb.org/3/movie/upcoming?api_key=48510b80e031b1cc54f349f5f5adb8bd&language=en-US&page=1')
                 .then(res => res.json())
-                .then(data => setPopularSeries(data.results));
+                .then(data => setUpcomingMovies(data.results));
         } catch (error) {
             console.log(error);
         }
@@ -20,8 +20,8 @@ export default function PopularSeries({ viewInformation, }) {
 
     return (
         <div className="">
-            <p className='pl-4 pb-4 pt-6 text-white text-xl font-light'>Popular Series</p>
-            <div className="w-screen flex justify-start gap-5 overflow-x-scroll">
+            <p className='pl-4 pb-4 pt-6 text-white text-xl font-light'>Upcoming Movies</p>
+            <div className="h-[250px] w-screen flex justify-start gap-5 overflow-x-scroll">
                 {isLoading ? <p>up</p> : <Swiper
                     // install Swiper modules
                     modules={[Autoplay]}
@@ -34,7 +34,7 @@ export default function PopularSeries({ viewInformation, }) {
                         disableOnInteraction: false,
                     }}
                 >
-                    {popularSeries.map((movie, index) => (
+                    {upcomingMovies.map((movie, index) => (
                         <SwiperSlide key={index}>
                             <div className='shrink-0 px-4 lg:cursor-pointer' onClick={() => viewInformation(movie)}>
                                 <img

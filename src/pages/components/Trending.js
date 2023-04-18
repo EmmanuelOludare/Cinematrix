@@ -25,7 +25,7 @@ export default function Trending({ viewInformation, url }) {
   return (
     <div className="">
       <p className='pl-4 pb-4 pt-6 text-white text-xl font-light'>Trending Now</p>
-      <div className="h-[200px] w-screen flex justify-start gap-5 overflow-x-scroll">
+      <div className="w-screen flex justify-start gap-5 overflow-x-scroll">
         {isLoading ? <p>up</p> : <Swiper
           // install Swiper modules
           modules={[Autoplay]}

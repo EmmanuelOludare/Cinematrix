@@ -20,8 +20,8 @@ export default function TopRatedSeries({ viewInformation, }) {
 
     return (
         <div className="">
-            <p className='pl-4 pb-4 text-white text-xl font-light'>Top Rated Series</p>
-            <div className="h-[250px] w-screen flex justify-start gap-5 overflow-x-scroll">
+            <p className='pl-4 pb-4 pt-6 text-white text-xl font-light'>Top Rated Series</p>
+            <div className=" w-screen flex justify-start gap-5 overflow-x-scroll">
                 {isLoading ? <p>up</p> : <Swiper // install Swiper modules modules={[Autoplay]} spaceBetween={0}
                     slidesPerView={2} direction="horizontal" loop={true} autoplay={{
                         delay: 5000, disableOnInteraction: false,

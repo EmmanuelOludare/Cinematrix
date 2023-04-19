@@ -20,13 +20,17 @@ export default function TopRatedMovies({ viewInformation, }) {
 
     return (
         <div className="">
-            <p className='pl-4 pb-4 pt-6 text-white text-xl font-light'>Top Rated Movies</p>
-            <div className=" w-screen flex justify-start gap-5 overflow-x-scroll">
+            <p className='pl-4 md:pl-7 pb-4 pt-6 text-white text-xl font-light md:text-4xl'>Top Rated Movies</p>
+            <div className="w-screen lg:w-[90vw] flex justify-start gap-5">
                 {isLoading ? <p>up</p> : <Swiper
                     // install Swiper modules
                     modules={[Autoplay]}
                     spaceBetween={0}
                     slidesPerView={2}
+                    breakpoints={{
+                        640: { slidesPerView: 3 },
+                        1000: { slidesPerView: 4 },
+                    }}
                     direction="horizontal"
                     loop={true}
                     autoplay={{
@@ -36,9 +40,9 @@ export default function TopRatedMovies({ viewInformation, }) {
                 >
                     {topRatedMovies.map((movie, index) => (
                         <SwiperSlide key={index}>
-                            <div className='shrink-0 px-4 lg:cursor-pointer' onClick={() => viewInformation(movie)}>
+                            <div className='shrink-0 px-4 md:px-7 lg:cursor-pointer' onClick={() => viewInformation(movie)}>
                                 <img
-                                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                                    src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                                     alt=""
                                     className='rounded-xl'
                                 />

@@ -56,24 +56,16 @@ export default function Series() {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="./favicon.ico" />
             </Head>
-            <main className='bg-dark-blue font-outfit pb-20'>
+            <main className='bg-dark-blue font-outfit pb-20 lg:flex md:pt-6'>
                 <Navbar />
-                <div className='flex items-center px-4 gap-4 mt-6'>
-                    <Image
-                        src={search}
-                        alt="Cinematrix Logo"
-                        className=''
-                        height={24}
-                        width={24}
-                    />
-                    <input type="text" placeholder='Search for TV series' className='outline-none bg-transparent w-full font-light indent-3 text-lg text-white focus:pb-1 caret-red focus:border-b-grayish-blue focus:border-b-2' />
-                </div>
-                <Trending viewInformation={viewInformation} url={trendingUrl} />
-                <PopularSeries viewInformation={viewInformation} />
-                <TopRatedSeries viewInformation={viewInformation} />
+                <section>
+                    <Trending viewInformation={viewInformation} url={trendingUrl} />
+                    <PopularSeries viewInformation={viewInformation} />
+                    <TopRatedSeries viewInformation={viewInformation} />
+                </section>
                 {visible ?
-                    <div onClick={() => setVisible(false)} className='z-20 h-full fixed top-0 bottom-0 bg-black bg-opacity-90 flex justify-center items-center p-4'>
-                        <div className='rounded-md bg-dark-blue z-30 text-white'>
+                    <div onClick={() => setVisible(false)} className='z-20 h-full w-screen fixed top-0 bottom-0 bg-black bg-opacity-90 flex justify-center items-center p-4'>
+                        <div className='rounded-md bg-dark-blue z-30 text-white max-w-[700px]'>
                             <img
                                 src={`https://image.tmdb.org/t/p/w500${information.backdrop_path}`}
                                 alt=""

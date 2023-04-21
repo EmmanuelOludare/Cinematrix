@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper';
 import 'swiper/css';
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 export default function TopRatedSeries({ viewInformation, }) {
     const [topRatedSeries, setTopRatedSeries] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         setIsLoading(true);
         try {
@@ -22,7 +23,7 @@ export default function TopRatedSeries({ viewInformation, }) {
         <div className="">
             <p className='pl-4 md:pl-7 pb-4 pt-6 text-white text-xl font-light md:text-4xl'>Top Rated Series</p>
             <div className="w-screen lg:w-[90vw] flex justify-start gap-5">
-                {isLoading ? <p>up</p> : <Swiper
+                {isLoading ? <div className='mx-auto'><ScaleLoader color="#FC4747" /></div> : <Swiper
                     // install Swiper modules
                     modules={[Autoplay]}
                     spaceBetween={0}

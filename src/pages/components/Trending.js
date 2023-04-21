@@ -5,10 +5,11 @@ import bookmarkEmpty from '../../assets/icon-bookmark-empty.svg';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper';
 import 'swiper/css';
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 export default function Trending({ viewInformation, url }) {
   const [trending, setTrending] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [bookmarked, setBookmarked] = useState([]);
 
   useEffect(() => {
@@ -34,7 +35,7 @@ export default function Trending({ viewInformation, url }) {
     <div className="">
       <p className='pl-4 md:pl-7 pb-4 pt-8 text-white text-xl font-light md:text-4xl'>Trending Now</p>
       <div className="w-screen lg:w-[90vw] flex justify-start gap-5 lg:mt-2">
-        {isLoading ? <p>up</p> : <Swiper
+        {isLoading ? <div className='mx-auto'><ScaleLoader color="#FC4747" /></div> : <Swiper
           // install Swiper modules
           modules={[Autoplay]}
           spaceBetween={30}

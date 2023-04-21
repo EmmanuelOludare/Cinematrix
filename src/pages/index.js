@@ -10,6 +10,7 @@ import Image from 'next/image';
 import Navbar from './components/Navbar';
 import bookmarkEmpty from '../assets/icon-bookmark-empty.svg';
 import play from '../assets/icon-bookmark-empty.svg';
+import backArrow from '../assets/back.png'
 
 export default function Home() {
   const [movieGenres, setMovieGenres] = useState([]);
@@ -57,7 +58,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="./favicon.ico" />
       </Head>
-      <main className='bg-dark-blue font-outfit pb-20 lg:flex md:pt-6'>
+      <main className={`bg-dark-blue font-outfit pb-20 lg:flex md:pt-6`} >
         <Navbar />
         <section className=''>
           <Trending viewInformation={viewInformation} url={trendingUrl} />
@@ -67,14 +68,20 @@ export default function Home() {
           <TopRatedSeries viewInformation={viewInformation} />
         </section>
         {visible ?
-          <div onClick={() => setVisible(false)} className='z-20 h-full w-screen fixed top-0 bottom-0 bg-black bg-opacity-90 flex justify-center items-center p-4'>
-            <div className='rounded-md bg-dark-blue z-30 text-white max-w-[700px]'>
+          <div className={`z-20 h-full w-screen fixed top-0 bottom-0 bg-black bg-opacity-90 px-4 ${visible ? `overflow-y-scroll` : `overflow-y-hidden`}`}>
+            <div className='rounded-md bg-dark-blue z-30 text-white my-10 mx-auto max-w-[700px] relative'>
+              <Image
+                src={backArrow}
+                alt=""
+                className='h-7 w-6 lg:cursor-pointer absolute left-4 top-4'
+                onClick={() => setVisible(false)}
+              />
               <img
                 src={`https://image.tmdb.org/t/p/w500${information.backdrop_path}`}
                 alt=""
                 className='rounded-t-md w-full'
               />
-              <div className='p-4 flex flex-col gap-2 font-light select-text-red'>
+              <div className='p-4 md:px-7 flex flex-col gap-2 font-light select-text-red'>
                 <p className=' text-3xl'>{information.title || information.name}</p>
                 <div className='inline-flex gap-1 text-lg'>
                   <p>Released: </p>
@@ -89,8 +96,8 @@ export default function Home() {
                   ))}
                 </div>
                 <p className='text-md '>{information.overview}</p>
-                <div className='flex justify-between'>
-                  <div className='flex flex-col items-center'>
+                <div className='flex justify-between mt-4'>
+                  <div className='flex flex-col items-center lg:cursor-pointer'>
                     <Image
                       src={bookmarkEmpty}
                       alt="Cinematrix Logo"
@@ -98,7 +105,7 @@ export default function Home() {
                     />
                     <p>Bookmark</p>
                   </div>
-                  <div className='flex flex-col items-center'>
+                  <div className='flex flex-col items-center lg:cursor-pointer'>
                     <Image
                       src={play}
                       alt="Cinematrix Logo"
@@ -106,7 +113,7 @@ export default function Home() {
                     />
                     <p>Watch</p>
                   </div>
-                  <div className='flex flex-col items-center'>
+                  <div className='flex flex-col items-center lg:cursor-pointer'>
                     <Image
                       src={bookmarkEmpty}
                       alt="Cinematrix Logo"

@@ -1,8 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import logo from '../assets/cinematrix.svg'
+import Cookies from 'js-cookie';
 
 export default function Login() {
+    Cookies.set('cookieName', 'cookieValue', { sameSite: 'none' });
+    const cookieValue = Cookies.get('cookieName');
     return (
         <div className='flex flex-col items-center h-screen bg-dark-blue pt-12'>
             <div className='flex flex-col justify-center items-center gap-14'>
@@ -18,7 +21,7 @@ export default function Login() {
                     <p className='text-[32px] pb-4'>Login</p>
                     <form className='flex flex-col gap-6'>
                         <input type='text' placeholder='Email Address' className='outline-none border-b-2 border-b-grayish-blue bg-transparent font-light indent-3 text-sm pb-1 caret-red focus:border-b-white' />
-                        <input type='password' placeholder='Password' className='outline-none border-b-2 border-b-grayish-blue bg-transparent font-light indent-3 text-sm pb-1 caret-red focus:border-b-white' />
+                        <input type='password' placeholder='Password' autoComplete="true" className='outline-none border-b-2 border-b-grayish-blue bg-transparent font-light indent-3 text-sm pb-1 caret-red focus:border-b-white' />
                         <button className='rounded-md bg-red py-2 font-light'>Login to your account</button>
                     </form>
                     <div className='text-sm text-center font-light flex gap-2 justify-center'>

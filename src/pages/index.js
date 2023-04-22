@@ -79,7 +79,7 @@ export default function Home() {
                 onClick={() => setVisible(false)}
               />
               <img
-                src={`https://image.tmdb.org/t/p/w500${information.backdrop_path}`}
+                src={`https://image.tmdb.org/t/p/original${information.backdrop_path}`}
                 alt=""
                 className='rounded-t-md w-full'
               />

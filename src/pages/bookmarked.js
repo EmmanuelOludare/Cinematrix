@@ -14,9 +14,10 @@ import play from '../assets/icon-bookmark-empty.svg';
 export default function Bookmarked() {
     return (
         <>
-            <main className='bg-dark-blue font-outfit lg:flex md:pt-6'>
+            <main className={`bg-dark-blue font-outfit lg:flex md:pt-6 lg:pt-0 lg:flex-wrap`}>
                 <Navbar />
-                <section>
+                <section className='lg:overflow-y-scroll overflow-x-hidden
+         lg:h-screen lg:w-[93%] lg:ml-[8%]'>
                     <p>hfddjdjd</p>
                 </section>
             </main >

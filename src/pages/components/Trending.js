@@ -32,7 +32,7 @@ export default function Trending({ viewInformation, url }) {
 
   return (
     <div className="">
-      <p className='pl-4 md:pl-7 pb-4 pt-8 text-white text-xl font-light md:text-4xl'>Trending Now</p>
+      <p className='pl-4 md:pl-7 pb-4 pt-8 lg:pt-4 text-white text-xl font-light md:text-4xl'>Trending Now</p>
       <div className="w-screen lg:w-[90vw] flex justify-start gap-5 lg:mt-2">
         {isLoading ? <div className='mx-auto'><ScaleLoader color="#FC4747" /></div> : <Swiper
           // install Swiper modules

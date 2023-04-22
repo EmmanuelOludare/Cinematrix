@@ -51,9 +51,10 @@ export default function Series() {
 
     return (
         <>
-            <main className='bg-dark-blue font-outfit lg:flex md:pt-6'>
+            <main className={`bg-dark-blue font-outfit lg:flex md:pt-6 lg:pt-0 lg:flex-wrap`}>
                 <Navbar />
-                <section>
+                <section className='lg:overflow-y-scroll overflow-x-hidden
+         lg:h-screen lg:w-[93%] lg:ml-[8%]'>
                     <Trending viewInformation={viewInformation} url={trendingUrl} />
                     <PopularSeries viewInformation={viewInformation} />
                     <TopRatedSeries viewInformation={viewInformation} />
@@ -68,7 +69,7 @@ export default function Series() {
                                 onClick={() => setVisible(false)}
                             />
                             <img
-                                src={`https://image.tmdb.org/t/p/w500${information.backdrop_path}`}
+                                src={`https://image.tmdb.org/t/p/original${information.backdrop_path}`}
                                 alt=""
                                 className='rounded-t-md w-full'
                             />

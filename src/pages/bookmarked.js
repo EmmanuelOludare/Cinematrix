@@ -14,12 +14,6 @@ import play from '../assets/icon-bookmark-empty.svg';
 export default function Bookmarked() {
     return (
         <>
-            <Head>
-                <title>Cinematrix</title>
-                <meta name="description" content="Entertainment web app" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="icon" href="./favicon.ico" />
-            </Head>
             <main className='bg-dark-blue font-outfit pb-20 lg:flex md:pt-6'>
                 <Navbar />
                 <section>

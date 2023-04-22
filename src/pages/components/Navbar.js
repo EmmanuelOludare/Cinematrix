@@ -15,57 +15,47 @@ import search from '../../assets/icon-search.svg';
 export default function Navbar() {
     const router = useRouter();
     return (
-        <nav className='bg-semi-dark-blue flex justify-between items-center px-4 py-5 max-h-screen lg:flex-col md:rounded-lg lg:rounded-none md:mx-6 lg:mx-0 lg:w-[7%] lg:fixed lg:h-full' >
+        <nav className='bg-semi-dark-blue flex justify-between items-center px-4 py-5 max-h-screen lg:flex-col md:rounded-lg lg:rounded-none md:mx-6 lg:mx-0 lg:w-[7%] lg:fixed lg:h-full lg:py-10' >
             <Image
                 src={logo}
                 alt="Cinematrix Logo"
-                className=''
-                height={20}
-                width={25}
+                className='lg:scale-[1.8]'
             />
-            <div className='flex items-center gap-6 lg:flex-col lg:gap-10'>
+            <div className='flex items-center gap-6 lg:flex-col lg:gap-20'>
                 <Link href="/" className=''>
                     <Image
                         src={router.pathname === '/' ? homeActive : home}
                         alt=""
-                        className=''
-                        height={16}
-                        width={20}
+                        className='lg:scale-[1.8]'
                     />
                 </Link>
                 <Link href="/movies" className=''>
                     <Image
                         src={router.pathname === '/movies' ? moviesActive : movies}
                         alt=""
-                        className=''
-                        height={16}
-                        width={20}
+                        className='lg:scale-[1.8]'
                     />
                 </Link>
                 <Link href="/series" className=''>
                     <Image
                         src={router.pathname === '/series' ? seriesActive : series}
                         alt=""
-                        className=''
-                        height={16}
-                        width={20}
+                        className='lg:scale-[1.8]'
                     />
                 </Link>
                 <Link href="/bookmarked" className=''>
                     <Image
                         src={router.pathname === '/bookmarked' ? bookmarksActive : bookmarks}
                         alt=""
-                        className=''
-                        height={16}
-                        width={20}
+                        className='lg:scale-[1.8]'
                     />
                 </Link>
             </div>
-            <div className='flex items-center gap-4'>
+            <div>
                 <Image
                     src={search}
                     alt="Cinematrix Logo"
-                    className='h-6 w-6'
+                    className='lg:scale-[1.2]'
                     onClick={() => router.push('/search')}
                 />
             </div>

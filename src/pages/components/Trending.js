@@ -9,7 +9,6 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 export default function Trending({ viewInformation, url }) {
   const [trending, setTrending] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [bookmarked, setBookmarked] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -22,13 +21,6 @@ export default function Trending({ viewInformation, url }) {
     }
     setIsLoading(false);
   }, []);
-
-  const completeTask = (movieId) => {
-    const newBookmark = movieId;
-    const updatedTasks = [...bookmarked, newBookmark];
-    setBookmarked(updatedTasks);
-    console.log(bookmarked);
-  };
 
   return (
     <div className="">

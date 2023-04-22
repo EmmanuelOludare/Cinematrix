@@ -1,11 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
-import Link from 'next/link';
 import Image from 'next/image';
-import bookmarkEmpty from '../assets/icon-bookmark-empty.svg';
-import play from '../assets/play.svg';
-import download from '../assets/download.svg';
+import Head from 'next/head';
+import ViewInfo from './components/ViewInfo';
 import search from '../assets/icon-search.svg';
 import backArrow from '../assets/back.png'
 
@@ -64,8 +61,16 @@ export default function Search() {
         return genre ? genre.name : null;
     };
 
+    const removeInfo = () => setVisible(false);
+
     return (
         <>
+            <Head>
+                <title>Cinematrix</title>
+                <meta name="description" content="Entertainment web app" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="icon" type="image/png" href="/favicon.png" />
+            </Head>
             <main className='bg-dark-blue font-outfit min-h-screen '>
                 <div className='flex items-center justify-between p-4 md:pl-7'>
                     <Image
@@ -95,65 +100,7 @@ export default function Search() {
                         </div>
                     ))}
                 </div>
-                {visible ?
-                    <div className={`z-20 h-full w-screen fixed top-0 bottom-0 bg-black bg-opacity-90 px-4 ${visible ? `overflow-y-scroll` : `overflow-y-hidden`}`}>
-                        <div className='rounded-md bg-dark-blue z-30 text-white my-16 mx-auto max-w-[700px] relative'>
-                            <Image
-                                src={backArrow}
-                                alt=""
-                                className='h-7 w-6 lg:cursor-pointer absolute left-4 top-4'
-                                onClick={() => setVisible(false)}
-                            />
-                            <img
-                                src={`https://image.tmdb.org/t/p/original${information.backdrop_path}`}
-                                alt=""
-                                className='rounded-t-md w-full'
-                            />
-                            <div className='p-4 md:px-7 flex flex-col gap-2 font-light select-text-red'>
-                                <p className=' text-3xl'>{information.title || information.name}</p>
-                                <div className='inline-flex gap-1 text-lg'>
-                                    <p>Released: </p>
-                                    <p className='w-[3.5ch] overflow-hidden whitespace-nowrap'>{information.release_date || information.first_air_date}</p>
-                                </div>
-                                <div className='flex flex-wrap items-center gap-2'>
-                                    {information.genre_ids.map((genre, index) => (
-                                        <div key={index} className='flex items-center gap-2'>
-                                            <div className='h-[5px] w-[5px] rounded-[50%] bg-white'></div>
-                                            <p className='text-lg'>{checkId(genre)}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                                <p className='text-md '>{information.overview}</p>
-                                <div className='flex justify-between mt-4'>
-                                    <div className='flex flex-col items-center lg:cursor-pointer'>
-                                        <Image
-                                            src={play}
-                                            alt="Cinematrix Logo"
-                                            className='h-6 w-6'
-                                        />
-                                        <p className='text-md  mt-[2px]'>Watch</p>
-                                    </div>
-                                    <div className='flex flex-col items-center lg:cursor-pointer'>
-                                        <Image
-                                            src={bookmarkEmpty}
-                                            alt="Cinematrix Logo"
-                                            className='h-6 w-4'
-                                        />
-                                        <p className='text-md mt-[2px]'>Bookmark</p>
-                                    </div>
-                                    <div className='flex flex-col items-center lg:cursor-pointer'>
-                                        <Image
-                                            src={download}
-                                            alt="Cinematrix Logo"
-                                            className='h-6 w-6'
-                                        />
-                                        <p className='text-md  mt-[2px]'>Download</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    : <></>}
+                <ViewInfo information={information} visible={visible} checkId={checkId} removeInfo={removeInfo} />
             </main >
         </>
     )

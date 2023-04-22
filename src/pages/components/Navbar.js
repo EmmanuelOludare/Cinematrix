@@ -11,12 +11,11 @@ import seriesActive from '../../assets/icon-series-active.svg'
 import bookmarks from '../../assets/icon-nav-bookmark.svg'
 import bookmarksActive from '../../assets/icon-bookmark-active.svg'
 import search from '../../assets/icon-search.svg';
-import man from '../../assets/man.jpg'
 
 export default function Navbar() {
     const router = useRouter();
     return (
-        <nav className='bg-semi-dark-blue flex justify-between items-center px-4 py-5 max-h-screen lg:flex-col md:rounded-lg lg:rounded-[20px] md:mx-6 lg:my-8 lg:ml-8 lg:' >
+        <nav className='bg-semi-dark-blue flex justify-between items-center px-4 py-5 max-h-screen lg:flex-col md:rounded-lg lg:rounded-none md:mx-6 lg:mx-0 lg:w-[7%] lg:fixed lg:h-full' >
             <Image
                 src={logo}
                 alt="Cinematrix Logo"
@@ -24,7 +23,7 @@ export default function Navbar() {
                 height={20}
                 width={25}
             />
-            <div className='flex items-center gap-6 lg:flex-col'>
+            <div className='flex items-center gap-6 lg:flex-col lg:gap-10'>
                 <Link href="/" className=''>
                     <Image
                         src={router.pathname === '/' ? homeActive : home}
@@ -43,7 +42,7 @@ export default function Navbar() {
                         width={20}
                     />
                 </Link>
-                <Link href="/series" className='text-red'>
+                <Link href="/series" className=''>
                     <Image
                         src={router.pathname === '/series' ? seriesActive : series}
                         alt=""
@@ -52,7 +51,7 @@ export default function Navbar() {
                         width={20}
                     />
                 </Link>
-                <Link href="/bookmarked" className='text-red'>
+                <Link href="/bookmarked" className=''>
                     <Image
                         src={router.pathname === '/bookmarked' ? bookmarksActive : bookmarks}
                         alt=""
@@ -68,11 +67,6 @@ export default function Navbar() {
                     alt="Cinematrix Logo"
                     className='h-6 w-6'
                     onClick={() => router.push('/search')}
-                />
-                <Image
-                    src={man}
-                    alt=""
-                    className='rounded-full border-2 border-white h-6 w-6'
                 />
             </div>
         </nav>

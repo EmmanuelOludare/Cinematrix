@@ -7,9 +7,9 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import Navbar from './components/Navbar';
-import search from '../assets/icon-search.svg';
 import bookmarkEmpty from '../assets/icon-bookmark-empty.svg';
-import play from '../assets/icon-bookmark-empty.svg';
+import play from '../assets/play.svg';
+import download from '../assets/download.svg';
 import backArrow from '../assets/back.png'
 
 export default function Movies() {
@@ -51,7 +51,7 @@ export default function Movies() {
     };
     return (
         <>
-            <main className='bg-dark-blue font-outfit pb-20 lg:flex md:pt-6'>
+            <main className='bg-dark-blue font-outfit lg:flex md:pt-6'>
                 <Navbar />
                 <section>
                     <Trending viewInformation={viewInformation} url={trendingUrl} />
@@ -61,7 +61,7 @@ export default function Movies() {
                 </section>
                 {visible ?
                     <div className={`z-20 h-full w-screen fixed top-0 bottom-0 bg-black bg-opacity-90 px-4 ${visible ? `overflow-y-scroll` : `overflow-y-hidden`}`}>
-                        <div className='rounded-md bg-dark-blue z-30 text-white my-10 mx-auto max-w-[700px] relative'>
+                        <div className='rounded-md bg-dark-blue z-30 text-white my-16 mx-auto max-w-[700px] relative'>
                             <Image
                                 src={backArrow}
                                 alt=""
@@ -91,40 +91,33 @@ export default function Movies() {
                                 <div className='flex justify-between mt-4'>
                                     <div className='flex flex-col items-center lg:cursor-pointer'>
                                         <Image
-                                            src={bookmarkEmpty}
-                                            alt="Cinematrix Logo"
-                                            className='h-6 w-6'
-                                        />
-                                        <p>Bookmark</p>
-                                    </div>
-                                    <div className='flex flex-col items-center lg:cursor-pointer'>
-                                        <Image
                                             src={play}
                                             alt="Cinematrix Logo"
                                             className='h-6 w-6'
                                         />
-                                        <p>Watch</p>
+                                        <p className='text-md  mt-[2px]'>Watch</p>
                                     </div>
                                     <div className='flex flex-col items-center lg:cursor-pointer'>
                                         <Image
                                             src={bookmarkEmpty}
                                             alt="Cinematrix Logo"
+                                            className='h-6 w-4'
+                                        />
+                                        <p className='text-md mt-[2px]'>Bookmark</p>
+                                    </div>
+                                    <div className='flex flex-col items-center lg:cursor-pointer'>
+                                        <Image
+                                            src={download}
+                                            alt="Cinematrix Logo"
                                             className='h-6 w-6'
                                         />
-                                        <p>Download</p>
+                                        <p className='text-md  mt-[2px]'>Download</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     : <></>}
-                <div className='bg-semi-dark-blue text-white fixed bottom-0 z-10 w-full py-3 px-5 flex items-center justify-between'>
-                    <p className='text-lg'>Watch limitlessly!</p>
-                    <div className='flex items-center gap-2'>
-                        <Link href="/login" className='border-[1px] border-white rounded-xl py-2 px-5 font-bold'>Login</Link>
-                        <Link href="/signup" className='text-red bg-white rounded-xl py-2 px-5 font-bold'>Sign up</Link>
-                    </div>
-                </div>
             </main >
         </>
     )

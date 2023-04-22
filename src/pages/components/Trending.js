@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import mediaIcon from '../../assets/media-type.svg';
-import bookmarkEmpty from '../../assets/icon-bookmark-empty.svg';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper';
 import 'swiper/css';
@@ -50,14 +49,6 @@ export default function Trending({ viewInformation, url }) {
           {trending.map((movie, index) => (
             <SwiperSlide key={index}>
               <div className='shrink-0 relative px-4 md:px-7 lg:cursor-pointer' onClick={() => viewInformation(movie)}>
-                <div className='bg-dark-blue absolute right-8 md:right-11 top-3 md:top-6 opacity-50 rounded-[50%] p-[12px] md:p-[16px]'>
-                  <Image
-                    src={bookmarkEmpty}
-                    alt=""
-                    className='h-4 w-[14px] md:h-6 md:w-[20px]'
-                    onClick={() => completeTask(movie.id)}
-                  />
-                </div>
                 <img
                   src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
                   alt=""

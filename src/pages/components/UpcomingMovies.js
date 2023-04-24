@@ -3,8 +3,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper';
 import 'swiper/css';
 import ScaleLoader from "react-spinners/ScaleLoader";
+import { useInfo } from '../../contexts/InfoContext';
 
-export default function UpcomingMovies({ viewInformation, }) {
+export default function UpcomingMovies() {
+    const { viewInformation, } = useInfo();
     const [upcomingMovies, setUpcomingMovies] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {

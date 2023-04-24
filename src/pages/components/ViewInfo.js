@@ -5,35 +5,40 @@ import play from '../../assets/play.svg';
 import download from '../../assets/download.svg';
 import backArrow from '../../assets/back.png'
 import bookmarksActive from '../../assets/icon-bookmark-active.svg'
+import { useInfo } from '../../contexts/InfoContext';
 
-export default function ViewInfo({ information, visible, checkId, removeInfo }) {
-    const [bookmarks, setBookmarks] = useState();
-    const handleBookmark = (e, information) => {
-        e.preventDefault();
-        if (bookmarks.indexOf(information) !== -1) {
-            localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
-            const newBookmarks = [...bookmarks];
-            const index = newBookmarks.findIndex(b => b.id === information.id);
-            if (index !== -1) {
-                newBookmarks.splice(index, 1);
-            }
-            setBookmarks(newBookmarks);
-            localStorage.setItem('bookmarks', JSON.stringify(newBookmarks));
-        } else {
-            try {
-                const updatedBookmarks = [...bookmarks, information];
-                setBookmarks(updatedBookmarks);
-                localStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks));
-            } catch (error) {
-                console.log(error);
-            }
-        }
-    }
+export default function ViewInfo({ }) {
+    const { information, visible, removeInfo, handleBookmark, bookmarks } = useInfo();
+    const [movieGenres, setMovieGenres] = useState([]);
+    const [tvGenres, setTvGenres] = useState([]);
+    const [genres, setGenres] = useState();
 
     useEffect(() => {
-        const storedBookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
-        setBookmarks(storedBookmarks);
+        try {
+            fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=48510b80e031b1cc54f349f5f5adb8bd&language=en-US')
+                .then(res => res.json())
+                .then(data => setMovieGenres(data.genres));
+        } catch (error) {
+            console.log(error);
+        }
+
+        try {
+            fetch('https://api.themoviedb.org/3/genre/tv/list?api_key=48510b80e031b1cc54f349f5f5adb8bd&language=en-US')
+                .then(res => res.json())
+                .then(data => setTvGenres(data.genres));
+        } catch (error) {
+            console.log(error);
+        }
+
+        setGenres([...movieGenres, ...tvGenres]);
     }, []);
+
+
+    function checkId(genreId) {
+        const genre = genres.find((genre) => genre.id === genreId);
+        return genre?.name ?? null;
+    }
+
     return (
         <div>
             {visible ?
@@ -69,7 +74,7 @@ export default function ViewInfo({ information, visible, checkId, removeInfo }) 
                                 <div className='flex flex-col items-center lg:cursor-pointer'>
                                     <Image
                                         src={play}
-                                        alt="Cinematrix Logo"
+                                        alt=""
                                         className='h-6 w-6'
                                     />
                                     <p className='text-md  mt-[2px]'>Watch</p>
@@ -77,16 +82,16 @@ export default function ViewInfo({ information, visible, checkId, removeInfo }) 
                                 <div className='flex flex-col items-center lg:cursor-pointer'>
                                     <Image
                                         src={bookmarks.includes(information) ? bookmarksActive : bookmarkEmpty}
-                                        alt="Cinematrix Logo"
+                                        alt=""
                                         className='h-6 w-4'
-                                        onClick={() => handleBookmark(event, information,)}
+                                        onClick={() => handleBookmark(event, information)}
                                     />
                                     <p className='text-md mt-[2px]'>Bookmark</p>
                                 </div>
                                 <div className='flex flex-col items-center lg:cursor-pointer'>
                                     <Image
                                         src={download}
-                                        alt="Cinematrix Logo"
+                                        alt=""
                                         className='h-6 w-6'
                                     />
                                     <p className='text-md  mt-[2px]'>Download</p>
@@ -95,7 +100,8 @@ export default function ViewInfo({ information, visible, checkId, removeInfo }) 
                         </div>
                     </div>
                 </div>
-                : <></>}
-        </div>
+                : <></>
+            }
+        </div >
     )
 }

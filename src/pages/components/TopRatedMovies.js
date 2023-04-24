@@ -3,8 +3,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper';
 import 'swiper/css';
 import ScaleLoader from "react-spinners/ScaleLoader";
+import { useInfo } from '../../contexts/InfoContext';
 
-export default function TopRatedMovies({ viewInformation, }) {
+export default function TopRatedMovies() {
+    const { viewInformation, } = useInfo();
     const [topRatedMovies, setTopRatedMovies] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {

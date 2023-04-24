@@ -4,15 +4,12 @@ import Image from 'next/image';
 import Head from 'next/head';
 import ViewInfo from './components/ViewInfo';
 import search from '../assets/icon-search.svg';
-import backArrow from '../assets/back.png'
+import backArrow from '../assets/back.png';
+import { useInfo } from '../contexts/InfoContext';
 
 export default function Search() {
+    const { viewInformation, handleBookmark, bookmarks } = useInfo();
     const router = useRouter();
-    const [movieGenres, setMovieGenres] = useState([]);
-    const [tvGenres, setTvGenres] = useState([]);
-    const [genres, setGenres] = useState();
-    const [information, setInformation] = useState();
-    const [visible, setVisible] = useState(false);
     const [query, setQuery] = useState('');
     const [searchInfo, setSearchInfo] = useState([]);
 
@@ -30,39 +27,6 @@ export default function Search() {
             console.error(error);
         }
     }
-
-    useEffect(() => {
-        try {
-            fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=48510b80e031b1cc54f349f5f5adb8bd&language=en-US')
-                .then(res => res.json())
-                .then(data => setMovieGenres(data.genres));
-        } catch (error) {
-            console.log(error);
-        }
-
-        try {
-            fetch('https://api.themoviedb.org/3/genre/tv/list?api_key=48510b80e031b1cc54f349f5f5adb8bd&language=en-US')
-                .then(res => res.json())
-                .then(data => setTvGenres(data.genres));
-        } catch (error) {
-            console.log(error);
-        }
-
-        setGenres([...movieGenres, ...tvGenres]);
-    }, []);
-
-    const viewInformation = (movie) => {
-        setInformation(movie);
-        setVisible(true);
-    }
-
-    const checkId = (genreId) => {
-        const genre = genres.find(genre => genre.id === genreId);
-        return genre ? genre.name : null;
-    };
-
-    const removeInfo = () => setVisible(false);
-
     return (
         <>
             <Head>
@@ -100,7 +64,7 @@ export default function Search() {
                         </div>
                     ))}
                 </div>
-                <ViewInfo information={information} visible={visible} checkId={checkId} removeInfo={removeInfo} />
+                <ViewInfo />
             </main >
         </>
     )

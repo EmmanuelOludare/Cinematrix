@@ -48,7 +48,7 @@ export default function Trending({ url }) {
                   alt=""
                   className='rounded-xl'
                 />
-                <div className='text-white absolute left-8 md:left-11 bottom-5 md:bottom-8 flex flex-col gap-1 bg-blend-overlay'>
+                <div className='text-white absolute left-8 md:left-11 bottom-5 md:bottom-8 flex flex-col gap-1 mix-blend-difference'>
                   <div className='flex gap-2 opacity-90 items-center'>
                     <p className='font-light text-sm md:text-lg w-[3.5ch] overflow-hidden whitespace-nowrap'>{movie.release_date || movie.first_air_date}</p>
                     <div className='h-[5px] w-[5px] rounded-[50%] bg-white'></div>

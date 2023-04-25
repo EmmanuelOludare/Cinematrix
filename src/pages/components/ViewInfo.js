@@ -8,7 +8,7 @@ import bookmarksActive from '../../assets/icon-bookmark-active.svg'
 import { useInfo } from '../../contexts/InfoContext';
 
 export default function ViewInfo({ }) {
-    const { information, visible, removeInfo, handleBookmark, bookmarks } = useInfo();
+    const { information, visible, removeInfo, addBookmark, removeBookmark, bookmarkAlert, bookmarkAlertState } = useInfo();
     const [movieGenres, setMovieGenres] = useState([]);
     const [tvGenres, setTvGenres] = useState([]);
     const [genres, setGenres] = useState();
@@ -73,30 +73,24 @@ export default function ViewInfo({ }) {
                             <div className='flex justify-between mt-4'>
                                 <div className='flex flex-col items-center lg:cursor-pointer'>
                                     <Image
-                                        src={play}
-                                        alt=""
-                                        className='h-6 w-6'
-                                    />
-                                    <p className='text-md  mt-[2px]'>Watch</p>
-                                </div>
-                                <div className='flex flex-col items-center lg:cursor-pointer'>
-                                    <Image
-                                        src={bookmarks.includes(information) ? bookmarksActive : bookmarkEmpty}
+                                        src={bookmarksActive}
                                         alt=""
                                         className='h-6 w-4'
-                                        onClick={() => handleBookmark(event, information)}
+                                        onClick={() => addBookmark(event, information)}
                                     />
-                                    <p className='text-md mt-[2px]'>Bookmark</p>
+                                    <p className='text-md mt-[2px]'>Add Bookmark</p>
                                 </div>
                                 <div className='flex flex-col items-center lg:cursor-pointer'>
                                     <Image
-                                        src={download}
+                                        src={bookmarkEmpty}
                                         alt=""
-                                        className='h-6 w-6'
+                                        className='h-6 w-4'
+                                        onClick={() => removeBookmark(event, information)}
                                     />
-                                    <p className='text-md  mt-[2px]'>Download</p>
+                                    <p className='text-md mt-[2px]'>Remove Bookmark</p>
                                 </div>
                             </div>
+                            <p className={`text-red text-md text-center transition-all ease-in-out ${bookmarkAlertState ? 'block opacity-100' : 'hidden opacity-0'}`}>{bookmarkAlert}</p>
                         </div>
                     </div>
                 </div>

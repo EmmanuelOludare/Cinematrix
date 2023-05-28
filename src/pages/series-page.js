@@ -29,7 +29,7 @@ export default function Series() {
     )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const movieGenreRequest = await fetch(`/api/genreMovieListApi`);
     const movieGenreDetails = await movieGenreRequest.json();
 
@@ -41,6 +41,5 @@ export async function getStaticProps() {
             movieGenreDetails,
             tvGenreDetails,
         },
-        revalidate: 60,
     }
 }

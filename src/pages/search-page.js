@@ -71,10 +71,10 @@ export default function Search() {
 }
 
 export async function getStaticProps() {
-    const movieGenreRequest = await fetch(`https://cinematrixx.vercel.app/api/genreMovieListApi`);
+    const movieGenreRequest = await fetch(`/api/genreMovieListApi`);
     const movieGenreDetails = await movieGenreRequest.json();
 
-    const tvGenreRequest = await fetch(`https://cinematrixx.vercel.app/api/genreTvListApi`);
+    const tvGenreRequest = await fetch(`/api/genreTvListApi`);
     const tvGenreDetails = await tvGenreRequest.json();
 
     return {

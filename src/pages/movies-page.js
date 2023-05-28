@@ -32,10 +32,10 @@ export default function Movies() {
 }
 
 export async function getStaticProps() {
-    const movieGenreRequest = await fetch(`http://localhost:3000/api/genreMovieListApi`);
+    const movieGenreRequest = await fetch(`https://cinematrixx.vercel.app/api/genreMovieListApi`);
     const movieGenreDetails = await movieGenreRequest.json();
 
-    const tvGenreRequest = await fetch(`http://localhost:3000/api/genreTvListApi`);
+    const tvGenreRequest = await fetch(`https://cinematrixx.vercel.app/api/genreTvListApi`);
     const tvGenreDetails = await tvGenreRequest.json();
 
     return {

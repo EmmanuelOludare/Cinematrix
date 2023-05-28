@@ -4,20 +4,26 @@ import { Autoplay } from 'swiper';
 import 'swiper/css';
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { useInfo } from '../../contexts/InfoContext';
+import axios from 'axios';
 
 export default function TopRatedSeries() {
     const { viewInformation, } = useInfo();
     const [topRatedSeries, setTopRatedSeries] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const genreType = 'tv';
+    const genreBranch = 'top_rated';
     useEffect(() => {
-        setIsLoading(true);
-        try {
-            fetch('https://api.themoviedb.org/3/tv/top_rated?api_key=48510b80e031b1cc54f349f5f5adb8bd&language=en-US&page=1')
-                .then(res => res.json())
-                .then(data => setTopRatedSeries(data.results));
-        } catch (error) {
-            console.log(error);
+        const topRatedSeriesDetails = {
+            method: 'GET',
+            url: `/api/allGenreApi`,
+            params: { genreType, genreBranch },
         }
+
+        axios.request(topRatedSeriesDetails).then((response) => {
+            setTopRatedSeries(response.data)
+        }).catch((error) => {
+            console.error(error)
+        })
         setIsLoading(false);
     }, []);
 
@@ -44,7 +50,8 @@ export default function TopRatedSeries() {
                     {topRatedSeries.map((movie, index) => (
                         <SwiperSlide key={index}>
                             <div className='shrink-0 px-4 md:px-7 lg:cursor-pointer' onClick={() => viewInformation(movie)}>
-                                <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt="" className='rounded-xl' />
+                                <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt="" className='rounded-xl' width={300}
+                                    height={700} />
                             </div>
                         </SwiperSlide>
                     ))}

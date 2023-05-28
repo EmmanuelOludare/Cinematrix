@@ -4,20 +4,26 @@ import { Autoplay } from 'swiper';
 import 'swiper/css';
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { useInfo } from '../../contexts/InfoContext';
+import axios from 'axios';
 
 export default function UpcomingMovies() {
     const { viewInformation, } = useInfo();
     const [upcomingMovies, setUpcomingMovies] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const genreType = 'movie';
+    const genreBranch = 'upcoming';
     useEffect(() => {
-        setIsLoading(true);
-        try {
-            fetch('https://api.themoviedb.org/3/movie/upcoming?api_key=48510b80e031b1cc54f349f5f5adb8bd&language=en-US&page=1')
-                .then(res => res.json())
-                .then(data => setUpcomingMovies(data.results));
-        } catch (error) {
-            console.log(error);
+        const upcomingMoviesDetails = {
+            method: 'GET',
+            url: `/api/allGenreApi`,
+            params: { genreType, genreBranch },
         }
+
+        axios.request(upcomingMoviesDetails).then((response) => {
+            setUpcomingMovies(response.data)
+        }).catch((error) => {
+            console.error(error)
+        })
         setIsLoading(false);
     }, []);
 
@@ -48,6 +54,8 @@ export default function UpcomingMovies() {
                                     src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
                                     alt=""
                                     className='rounded-xl'
+                                    width={300}
+                                    height={700}
                                 />
                             </div>
                         </SwiperSlide>

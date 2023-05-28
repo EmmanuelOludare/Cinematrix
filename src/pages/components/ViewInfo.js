@@ -1,42 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState, } from 'react'
 import Image from 'next/image';
-import bookmarkEmpty from '../../assets/icon-bookmark-empty.svg';
-import play from '../../assets/play.svg';
-import download from '../../assets/download.svg';
 import backArrow from '../../assets/back.png'
-import bookmarksActive from '../../assets/icon-bookmark-active.svg'
 import { useInfo } from '../../contexts/InfoContext';
 
-export default function ViewInfo({ }) {
-    const { information, visible, removeInfo, addBookmark, removeBookmark, bookmarkAlert, bookmarkAlertState } = useInfo();
-    const [movieGenres, setMovieGenres] = useState([]);
-    const [tvGenres, setTvGenres] = useState([]);
-    const [genres, setGenres] = useState();
-
-    useEffect(() => {
-        try {
-            fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=48510b80e031b1cc54f349f5f5adb8bd&language=en-US')
-                .then(res => res.json())
-                .then(data => setMovieGenres(data.genres));
-        } catch (error) {
-            console.log(error);
-        }
-
-        try {
-            fetch('https://api.themoviedb.org/3/genre/tv/list?api_key=48510b80e031b1cc54f349f5f5adb8bd&language=en-US')
-                .then(res => res.json())
-                .then(data => setTvGenres(data.genres));
-        } catch (error) {
-            console.log(error);
-        }
-
-        setGenres([...movieGenres, ...tvGenres]);
-    }, []);
-
+export default function ViewInfo({ movieGenreDetails, tvGenreDetails, }) {
+    const { information, visible, removeInfo, } = useInfo();
+    const [genres, setGenres] = useState(movieGenreDetails, tvGenreDetails);
 
     function checkId(genreId) {
-        const genre = genres.find((genre) => genre.id === genreId);
-        return genre?.name ?? null;
+        const genre = genres.find(item => item.id === genreId);
+        return genre ? genre.name : 'Unknown Genre';
     }
 
     return (
@@ -70,27 +43,6 @@ export default function ViewInfo({ }) {
                                 ))}
                             </div>
                             <p className='text-md '>{information.overview}</p>
-                            <div className='flex justify-between mt-4'>
-                                <div className='flex flex-col items-center lg:cursor-pointer'>
-                                    <Image
-                                        src={bookmarksActive}
-                                        alt=""
-                                        className='h-6 w-4'
-                                        onClick={() => addBookmark(event, information)}
-                                    />
-                                    <p className='text-md mt-[2px]'>Add Bookmark</p>
-                                </div>
-                                <div className='flex flex-col items-center lg:cursor-pointer'>
-                                    <Image
-                                        src={bookmarkEmpty}
-                                        alt=""
-                                        className='h-6 w-4'
-                                        onClick={() => removeBookmark(event, information)}
-                                    />
-                                    <p className='text-md mt-[2px]'>Remove Bookmark</p>
-                                </div>
-                            </div>
-                            <p className={`text-red text-md text-center transition-all ease-in-out ${bookmarkAlertState ? 'block opacity-100' : 'hidden opacity-0'}`}>{bookmarkAlert}</p>
                         </div>
                     </div>
                 </div>

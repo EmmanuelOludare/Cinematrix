@@ -1,10 +1,4 @@
-import { useState, useEffect } from 'react';
-import Trending from './components/Trending';
-import UpcomingMovies from './components/UpcomingMovies';
-import PopularMovies from './components/PopularMovies';
-import TopRatedMovies from './components/TopRatedMovies';
 import ViewInfo from './components/ViewInfo';
-import Navbar from './components/Navbar';
 import Head from 'next/head';
 import { useInfo } from '../contexts/InfoContext';
 
@@ -19,7 +13,6 @@ export default function Bookmarked() {
                 <link rel="icon" type="image/png" href="/favicon.png" />
             </Head>
             <main className={`bg-dark-blue font-outfit lg:flex md:pt-6 lg:pt-0 lg:flex-wrap min-h-screen`}>
-                <Navbar />
                 <section className='lg:overflow-y-scroll overflow-x-hidden
          lg:h-screen lg:w-[93%] lg:ml-[8%] pb-4'>
                     <p className='pl-4 md:pl-7 pb-4 pt-4 lg:pt-4 text-white text-xl font-light md:text-4xl'>Bookmarked</p>

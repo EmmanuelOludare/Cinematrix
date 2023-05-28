@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import Trending from './components/Trending';
 import PopularMovies from './components/PopularMovies';
 import TopRatedMovies from './components/TopRatedMovies';
@@ -7,11 +6,10 @@ import TopRatedSeries from './components/TopRatedSeries';
 import ViewInfo from './components/ViewInfo';
 import Head from 'next/head';
 import Navbar from './components/Navbar';
-import { useInfo } from '../contexts/InfoContext';
+import axios from 'axios';
 
-export default function Home() {
-  const { viewInformation, handleBookmark, bookmarks } = useInfo();
-  const trendingUrl = 'https://api.themoviedb.org/3/trending/all/day?api_key=48510b80e031b1cc54f349f5f5adb8bd';
+export default function Home({ movieGenreDetails, tvGenreDetails, }) {
+  const trendingType = 'all';
   return (
     <>
       <Head>
@@ -24,14 +22,30 @@ export default function Home() {
         <Navbar />
         <section className='lg:overflow-y-scroll overflow-x-hidden
          lg:h-screen lg:w-[93%] lg:ml-[8%] pb-4'>
-          <Trending url={trendingUrl} />
+          <Trending type={trendingType} />
           <PopularMovies />
           <TopRatedMovies />
           <PopularSeries />
           <TopRatedSeries />
         </section>
-        <ViewInfo />
+        <ViewInfo movieGenreDetails={movieGenreDetails} tvGenreDetails={tvGenreDetails} />
       </main >
     </>
   )
+}
+
+export async function getStaticProps() {
+  const movieGenreRequest = await fetch(`http://localhost:3000/api/genreMovieListApi`);
+  const movieGenreDetails = await movieGenreRequest.json();
+
+  const tvGenreRequest = await fetch(`http://localhost:3000/api/genreTvListApi`);
+  const tvGenreDetails = await tvGenreRequest.json();
+
+  return {
+    props: {
+      movieGenreDetails,
+      tvGenreDetails,
+    },
+    revalidate: 60,
+  }
 }

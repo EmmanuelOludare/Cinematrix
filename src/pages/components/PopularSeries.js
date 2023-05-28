@@ -4,20 +4,26 @@ import { Autoplay } from 'swiper';
 import 'swiper/css';
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { useInfo } from '../../contexts/InfoContext';
+import axios from 'axios'
 
 export default function PopularSeries() {
     const { viewInformation, } = useInfo();
     const [popularSeries, setPopularSeries] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const genreType = 'tv';
+    const genreBranch = 'popular';
     useEffect(() => {
-        setIsLoading(true);
-        try {
-            fetch('https://api.themoviedb.org/3/tv/popular?api_key=48510b80e031b1cc54f349f5f5adb8bd&language=en-US&page=1')
-                .then(res => res.json())
-                .then(data => setPopularSeries(data.results));
-        } catch (error) {
-            console.log(error);
+        const popularSeriesDetails = {
+            method: 'GET',
+            url: `/api/allGenreApi`,
+            params: { genreType, genreBranch },
         }
+
+        axios.request(popularSeriesDetails).then((response) => {
+            setPopularSeries(response.data)
+        }).catch((error) => {
+            console.error(error)
+        })
         setIsLoading(false);
     }, []);
 
@@ -48,6 +54,8 @@ export default function PopularSeries() {
                                     src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
                                     alt=""
                                     className='rounded-xl'
+                                    width={300}
+                                    height={700}
                                 />
                             </div>
                         </SwiperSlide>

@@ -69,3 +69,19 @@ export default function Search() {
         </>
     )
 }
+
+export async function getStaticProps() {
+    const movieGenreRequest = await fetch(`http://localhost:3000/api/genreMovieListApi`);
+    const movieGenreDetails = await movieGenreRequest.json();
+
+    const tvGenreRequest = await fetch(`http://localhost:3000/api/genreTvListApi`);
+    const tvGenreDetails = await tvGenreRequest.json();
+
+    return {
+        props: {
+            movieGenreDetails,
+            tvGenreDetails,
+        },
+        revalidate: 60,
+    }
+}

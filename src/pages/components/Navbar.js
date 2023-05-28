@@ -29,16 +29,16 @@ export default function Navbar() {
                         className='lg:scale-[1.8]'
                     />
                 </Link>
-                <Link href="/movies" className=''>
+                <Link href="/movies-page" className=''>
                     <Image
-                        src={router.pathname === '/movies' ? moviesActive : movies}
+                        src={router.pathname === '/movies-page' ? moviesActive : movies}
                         alt=""
                         className='lg:scale-[1.8]'
                     />
                 </Link>
-                <Link href="/series" className=''>
+                <Link href="/series-page" className=''>
                     <Image
-                        src={router.pathname === '/series' ? seriesActive : series}
+                        src={router.pathname === '/series-page' ? seriesActive : series}
                         alt=""
                         className='lg:scale-[1.8]'
                     />
@@ -55,8 +55,8 @@ export default function Navbar() {
                 <Image
                     src={search}
                     alt="Cinematrix Logo"
-                    className='lg:scale-[1.2]'
-                    onClick={() => router.push('/search')}
+                    className='lg:scale-[1.2] cursor-pointer'
+                    onClick={() => router.push('/search-page')}
                 />
             </div>
         </nav>

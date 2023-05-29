@@ -15,7 +15,7 @@ export default function UpcomingMovies() {
     useEffect(() => {
         const upcomingMoviesDetails = {
             method: 'GET',
-            url: `/api/allGenreApi`,
+            url: `https://cinematrixx.vercel.app/api/allGenreApi`,
             params: { genreType, genreBranch },
         }
 

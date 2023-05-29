@@ -15,7 +15,7 @@ export default function TopRatedSeries() {
     useEffect(() => {
         const topRatedSeriesDetails = {
             method: 'GET',
-            url: `/api/allGenreApi`,
+            url: `https://cinematrixx.vercel.app/api/allGenreApi`,
             params: { genreType, genreBranch },
         }
 

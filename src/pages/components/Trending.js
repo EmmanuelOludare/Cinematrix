@@ -16,7 +16,7 @@ export default function Trending({ type }) {
   useEffect(() => {
     const trendingDetails = {
       method: 'GET',
-      url: `/api/trendingApi`,
+      url: `https://cinematrixx.vercel.app/api/trendingApi`,
       params: { type },
     }
 

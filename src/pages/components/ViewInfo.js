@@ -23,7 +23,7 @@ export default function ViewInfo({ movieGenreDetails, tvGenreDetails, }) {
                             className='h-7 w-6 lg:cursor-pointer absolute left-4 top-4'
                             onClick={removeInfo}
                         />
-                        <img
+                        <Image
                             src={`https://image.tmdb.org/t/p/original${information.backdrop_path}`}
                             alt=""
                             className='rounded-t-md w-full'

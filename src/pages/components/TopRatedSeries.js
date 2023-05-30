@@ -51,8 +51,7 @@ export default function TopRatedSeries() {
                     {topRatedSeries.map((movie, index) => (
                         <SwiperSlide key={index}>
                             <div className='shrink-0 px-4 md:px-7 lg:cursor-pointer' onClick={() => viewInformation(movie)}>
-                                <Image src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt="" className='rounded-xl' width={300}
-                                    height={700} />
+                                <Image src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt="" className='rounded-xl' width={300} />
                             </div>
                         </SwiperSlide>
                     ))}

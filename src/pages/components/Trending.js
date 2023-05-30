@@ -50,7 +50,6 @@ export default function Trending({ type }) {
                   src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
                   alt=""
                   className='rounded-3xl'
-                  height={1000}
                   width={1000}
                 />
                 <div className='text-white absolute left-8 md:left-11 bottom-5 md:bottom-8 flex flex-col gap-1 mix-blend-difference'>

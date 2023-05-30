@@ -56,7 +56,6 @@ export default function PopularMovies() {
                                     alt=""
                                     className='rounded-xl'
                                     width={300}
-                                    height={700}
                                 />
                             </div>
                         </SwiperSlide>

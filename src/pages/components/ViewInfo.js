@@ -24,9 +24,11 @@ export default function ViewInfo({ movieGenreDetails, tvGenreDetails, }) {
                             onClick={removeInfo}
                         />
                         <Image
-                            src={information.backdrop_path}
+                            src={`https://image.tmdb.org/t/p/original${information.backdrop_path}`}
                             alt=""
                             className='rounded-t-md w-full'
+                            height={500}
+                            width={1500}
                         />
                         <div className='p-4 md:px-7 flex flex-col gap-2 font-light select-text-red'>
                             <p className=' text-3xl'>{information.title || information.name}</p>

@@ -24,7 +24,7 @@ export default function ViewInfo({ movieGenreDetails, tvGenreDetails, }) {
                             onClick={removeInfo}
                         />
                         <Image
-                            src={`https://image.tmdb.org/t/p/original${information.backdrop_path}`}
+                            src={information.backdrop_path}
                             alt=""
                             className='rounded-t-md w-full'
                         />

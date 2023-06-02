@@ -6,7 +6,8 @@ import { Autoplay } from 'swiper';
 import 'swiper/css';
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { useInfo } from '../../contexts/InfoContext';
-import axios from 'axios'
+import axios from 'axios';
+
 
 export default function Trending({ type }) {
   const { viewInformation, } = useInfo();
@@ -16,7 +17,7 @@ export default function Trending({ type }) {
   useEffect(() => {
     const trendingDetails = {
       method: 'GET',
-      url: `https://cinematrixx.vercel.app/api/trendingApi`,
+      url: `http://localhost:3000/api/trendingApi`,
       params: { type },
     }
 
@@ -52,6 +53,9 @@ export default function Trending({ type }) {
                   className='rounded-3xl'
                   width={2000}
                   height={800}
+                  placeholder='blur'
+                  blurDataURL='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAuAAAAGQCAIAAAD+AVtLAAAABmJLR0QA/wD/AP+gvaeTAAAB7ElEQVRoge3X2Y3rYBQG4I9eE2VpHYYkYr0v1NXnENNK0EYQRuRuxCXIFpFLqxOzEGOQrIRCVIZOZI6bZlHdkQIohHKcIVth8B+v98zvPvfM/j5z/S6tIYhFmjnKRUgIItDAAKIBGSSgBAgIAiECBEkgACQgRAkgQIgMEIESSAECACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIECSJGgBCIyDBCBJIYAkCACAiEIE
+                  '
                 />
                 <div className='text-white absolute left-8 md:left-11 bottom-5 md:bottom-8 flex flex-col gap-1 mix-blend-difference'>
                   <div className='flex gap-2 opacity-90 items-center'>

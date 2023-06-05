@@ -6,7 +6,7 @@ import Head from 'next/head';
 import Navbar from './components/Navbar';
 import { useInfo } from '../contexts/InfoContext';
 
-export default function Series() {
+export default function Series({ movieGenreDetails, tvGenreDetails, }) {
     const { isLoading, } = useInfo();
     const trendingType = 'tv';
     return (
@@ -26,7 +26,7 @@ export default function Series() {
                     <PopularSeries />
                     <TopRatedSeries />
                 </section>
-                <ViewInfo />
+                <ViewInfo movieGenreDetails={movieGenreDetails} tvGenreDetails={tvGenreDetails} />
             </main >
         </>
     )

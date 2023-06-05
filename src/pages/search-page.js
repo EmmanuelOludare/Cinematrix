@@ -7,7 +7,7 @@ import search from '../assets/icon-search.svg';
 import backArrow from '../assets/back.png';
 import { useInfo } from '../contexts/InfoContext';
 
-export default function Search() {
+export default function Search({ movieGenreDetails, tvGenreDetails, }) {
     const { viewInformation, } = useInfo();
     const router = useRouter();
     const [query, setQuery] = useState('');
@@ -64,7 +64,7 @@ export default function Search() {
                         </div>
                     ))}
                 </div>
-                <ViewInfo />
+                <ViewInfo movieGenreDetails={movieGenreDetails} tvGenreDetails={tvGenreDetails} />
             </main >
         </>
     )

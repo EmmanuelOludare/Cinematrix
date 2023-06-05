@@ -7,7 +7,7 @@ import Navbar from './components/Navbar';
 import { useInfo } from '../contexts/InfoContext';
 
 export default function Series({ movieGenreDetails, tvGenreDetails, }) {
-    const { isLoading, } = useInfo();
+    const { isLoading, error, } = useInfo();
     const trendingType = 'tv';
     return (
         <>
@@ -21,7 +21,13 @@ export default function Series({ movieGenreDetails, tvGenreDetails, }) {
                 <Navbar />
                 <section className='lg:overflow-y-scroll overflow-x-hidden
                  lg:h-screen lg:w-[93%] lg:ml-[8%] pb-4'>
-                    {isLoading && <div className={`${isLoading ? 'opacity-100' : 'opacity-0'} transition-all flex justify-center z-10 items-center h-screen w-full bg-dark-blue`}><ScaleLoader color="#FC4747" height={100} width={10} radius={10} /></div>}
+                    {isLoading && <div className={`${isLoading ? 'opacity-100' : 'opacity-0'} transition-all flex justify-center z-10 items-center h-screen w-full bg-dark-blue`}>
+                        {error === '' ? <ScaleLoader color="#FC4747" height={100} width={10} radius={10} /> :
+                            <div className='flex flex-col gap-5 text-white text-center '>
+                                <p className='text-xl'>{error}</p>
+                                <button className='mx-auto text-md bg-red p-2 w-20 rounded-md' onClick={() => window.location.reload()}>Retry</button>
+                            </div>
+                        }</div>}
                     <Trending type={trendingType} />
                     <PopularSeries />
                     <TopRatedSeries />

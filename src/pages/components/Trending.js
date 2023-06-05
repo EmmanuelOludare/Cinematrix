@@ -4,15 +4,13 @@ import mediaIcon from '../../assets/media-type.svg';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper';
 import 'swiper/css';
-import ScaleLoader from "react-spinners/ScaleLoader";
 import axios from 'axios';
 import { useInfo } from '../../contexts/InfoContext';
 
 
 export default function Trending({ type }) {
-  const { viewInformation, setLoadingState, } = useInfo();
+  const { viewInformation, setLoadingState, setErrorMessage, } = useInfo();
   const [trending, setTrending] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const trendingDetails = {
@@ -23,20 +21,21 @@ export default function Trending({ type }) {
 
     axios.request(trendingDetails).then((response) => {
       setTrending(response.data)
+      setTimeout(() => {
+        setLoadingState(false);
+      }, 1000);
     }).catch((error) => {
-      console.error(error)
+      setTimeout(() => {
+        console.error(error)
+        setErrorMessage('Apologies, unable to fetch data. Please check your connection and try again later. Thank you.')
+      }, 10000);
     })
-    setIsLoading(false);
-    setTimeout(() => {
-      setLoadingState();
-    }, 2500);
-
   }, []);
 
   return (
     <div className="">
       <div className="w-screen lg:w-[90vw] pt-8 lg:pt-4 flex justify-start gap-5 lg:mt-4">
-        {isLoading ? <div className='mx-auto'><ScaleLoader color="#FC4747" /></div> : <Swiper
+        <Swiper
           // install Swiper modules
           modules={[Autoplay]}
           spaceBetween={30}
@@ -82,7 +81,7 @@ export default function Trending({ type }) {
               </div>
             </SwiperSlide>
           ))}
-        </Swiper>}
+        </Swiper>
       </div>
     </div>
   )

@@ -3,14 +3,12 @@ import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper';
 import 'swiper/css';
-import ScaleLoader from "react-spinners/ScaleLoader";
 import { useInfo } from '../../contexts/InfoContext';
 import axios from 'axios';
 
 export default function TopRatedSeries() {
     const { viewInformation, } = useInfo();
     const [topRatedSeries, setTopRatedSeries] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
     const genreType = 'tv';
     const genreBranch = 'top_rated';
     useEffect(() => {
@@ -25,14 +23,13 @@ export default function TopRatedSeries() {
         }).catch((error) => {
             console.error(error)
         })
-        setIsLoading(false);
     }, []);
 
     return (
         <div className="">
             <p className='pl-4 md:pl-7 pb-4 pt-6 text-white text-xl font-light md:text-4xl'>Top Rated Series</p>
             <div className="w-screen lg:w-[90vw] flex justify-start gap-5">
-                {isLoading ? <div className='mx-auto'><ScaleLoader color="#FC4747" /></div> : <Swiper
+                <Swiper
                     // install Swiper modules
                     modules={[Autoplay]}
                     spaceBetween={0}
@@ -56,7 +53,7 @@ export default function TopRatedSeries() {
                             </div>
                         </SwiperSlide>
                     ))}
-                </Swiper>}
+                </Swiper>
             </div>
         </div >
     )

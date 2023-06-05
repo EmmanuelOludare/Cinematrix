@@ -4,7 +4,7 @@ import TopRatedSeries from './components/TopRatedSeries';
 import ViewInfo from './components/ViewInfo';
 import Head from 'next/head';
 import Navbar from './components/Navbar';
-import { useInfo } from '../../contexts/InfoContext';
+import { useInfo } from '../contexts/InfoContext';
 
 export default function Series() {
     const { isLoading, } = useInfo();

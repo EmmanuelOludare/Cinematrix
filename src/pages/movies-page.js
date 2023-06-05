@@ -5,7 +5,7 @@ import TopRatedMovies from './components/TopRatedMovies';
 import ViewInfo from './components/ViewInfo';
 import Head from 'next/head';
 import Navbar from './components/Navbar';
-import { useInfo } from '../../contexts/InfoContext';
+import { useInfo } from '../contexts/InfoContext';
 
 export default function Movies() {
     const { isLoading, } = useInfo();

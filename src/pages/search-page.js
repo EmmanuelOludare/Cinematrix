@@ -8,7 +8,7 @@ import backArrow from '../assets/back.png';
 import { useInfo } from '../contexts/InfoContext';
 
 export default function Search() {
-    const { viewInformation, handleBookmark, bookmarks } = useInfo();
+    const { viewInformation, } = useInfo();
     const router = useRouter();
     const [query, setQuery] = useState('');
     const [searchInfo, setSearchInfo] = useState([]);

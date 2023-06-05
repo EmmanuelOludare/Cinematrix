@@ -10,6 +10,7 @@ export function useInfo() {
 export default function InfoProvider({ children }) {
     const [information, setInformation] = useState();
     const [visible, setVisible] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const viewInformation = (movie) => {
         setInformation(movie);
@@ -17,12 +18,18 @@ export default function InfoProvider({ children }) {
     }
 
     const removeInfo = () => setVisible(false);
+    const setLoadingState = () => {
+        setIsLoading(false)
+        console.log(isLoading)
+    };
 
     const value = {
         information,
         viewInformation,
         visible,
         removeInfo,
+        isLoading,
+        setLoadingState,
     };
 
     return (

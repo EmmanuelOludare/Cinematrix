@@ -5,12 +5,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper';
 import 'swiper/css';
 import ScaleLoader from "react-spinners/ScaleLoader";
-import { useInfo } from '../../contexts/InfoContext';
 import axios from 'axios';
+import { useInfo } from '../../contexts/InfoContext';
 
 
 export default function Trending({ type }) {
-  const { viewInformation, } = useInfo();
+  const { viewInformation, setLoadingState, } = useInfo();
   const [trending, setTrending] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -27,6 +27,10 @@ export default function Trending({ type }) {
       console.error(error)
     })
     setIsLoading(false);
+    setTimeout(() => {
+      setLoadingState();
+    }, 2500);
+
   }, []);
 
   return (

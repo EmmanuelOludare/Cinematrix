@@ -5,8 +5,10 @@ import TopRatedMovies from './components/TopRatedMovies';
 import ViewInfo from './components/ViewInfo';
 import Head from 'next/head';
 import Navbar from './components/Navbar';
+import { useInfo } from '../../contexts/InfoContext';
 
 export default function Movies() {
+    const { isLoading, } = useInfo();
     const trendingType = 'movie';
     return (
         <>
@@ -20,6 +22,7 @@ export default function Movies() {
                 <Navbar />
                 <section className='lg:overflow-y-scroll overflow-x-hidden
          lg:h-screen lg:w-[93%] lg:ml-[8%] pb-4'>
+                    {isLoading && <div className={`${isLoading ? 'opacity-100' : 'opacity-0'} transition-all flex justify-center z-10 items-center h-screen w-full bg-dark-blue`}><ScaleLoader color="#FC4747" height={100} width={10} radius={10} /></div>}
                     <Trending type={trendingType} />
                     <UpcomingMovies />
                     <PopularMovies />

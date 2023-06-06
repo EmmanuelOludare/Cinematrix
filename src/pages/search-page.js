@@ -7,6 +7,7 @@ import search from '../assets/icon-search.svg';
 import backArrow from '../assets/back.png';
 import { useInfo } from '../contexts/InfoContext';
 
+
 export default function Search({ movieGenreDetails, tvGenreDetails, }) {
     const { viewInformation, } = useInfo();
     const router = useRouter();

@@ -38,7 +38,7 @@ export default function ViewInfo({ movieGenreDetails, tvGenreDetails, }) {
                             </div>
                             <div className='flex flex-wrap items-center gap-2'>
                                 {information.genre_ids.map((genre, index) => (
-                                    <div key={index} className='flex items-center gap-2'>
+                                    !checkId(genre) === 'Unknown Genre' && <div key={index} className='flex items-center gap-2'>
                                         <div className='h-[5px] w-[5px] rounded-[50%] bg-white'></div>
                                         <p className='text-lg'>{checkId(genre)}</p>
                                     </div>

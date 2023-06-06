@@ -6,6 +6,7 @@ import ViewInfo from './components/ViewInfo';
 import Head from 'next/head';
 import Navbar from './components/Navbar';
 import { useInfo } from '../contexts/InfoContext';
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 export default function Movies({ movieGenreDetails, tvGenreDetails, }) {
     const { isLoading, error, } = useInfo();

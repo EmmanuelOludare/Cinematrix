@@ -5,7 +5,7 @@ import { Autoplay } from 'swiper';
 import 'swiper/css';
 import { useInfo } from '../../contexts/InfoContext';
 import axios from 'axios';
-s
+
 export default function TopRatedSeries() {
     const { viewInformation, } = useInfo();
     const [topRatedSeries, setTopRatedSeries] = useState([]);
